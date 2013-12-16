@@ -1,0 +1,29 @@
+{
+    "versionLabel": "1.0",
+    "uuid": "213a2b1c-0846-4f63-8cd7-ac16bdf07f12",
+    "appKeys": {},
+    "longName": "BattBar - Sample",
+    "versionCode": 1,
+    "capabilities": [
+        ""
+    ],
+    "shortName": "BattBar",
+    "companyName": "thunsaker",
+    "watchapp": {
+        "watchface": false
+    },
+    "resources": {
+        "media": [
+            {
+                "type": "png",
+                "name": "BLACK_LINE_LONG",
+                "file": "images/black_line_long.png"
+            },
+            {
+                "type": "png",
+                "name": "BLACK_LINE_FULL",
+                "file": "images/black_line_tall.png"
+            }
+        ]
+    }
+}
