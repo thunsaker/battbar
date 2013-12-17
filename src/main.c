@@ -1,3 +1,5 @@
+// 2013 Thomas Hunsaker @thunsaker
+
 #include <pebble.h>
 #include "battbar.h"
 
