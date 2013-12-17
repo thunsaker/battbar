@@ -1,16 +1,17 @@
 // 2013 Thomas Hunsaker @thunsaker
+// Main.c
+// BattBar v.1.0
 
 #include <pebble.h>
 #include "battbar.h"
 
 static Window *window;
 
-static TextLayer *text_layer_label;
 static TextLayer *text_layer_percentage;
 
 int main(void) {
 	window = window_create();
-	window_stack_push(window, true /* Animated */ );
+	window_stack_push(window, true);
 	
 	Layer *window_layer = window_get_root_layer(window);
 	GRect bounds = layer_get_frame(window_layer);
@@ -26,7 +27,13 @@ int main(void) {
 	snprintf(percent_display_text, sizeof(percent_display_text), "%d%%", raw_percent);
 	text_layer_set_text(text_layer_percentage, percent_display_text);
 	
-	drawBatteryBar(BATBAR_POSITION_LEFT, BATBAR_DIRECTION_UP, BATBAR_COLOR_BLACK, raw_percent, window_layer);
+	/* Change these options to your liking */
+	BBOptions options;
+	options.position = BATTBAR_POSITION_LEFT;
+	options.direction = BATTBAR_DIRECTION_DOWN;
+	options.color = BATTBAR_COLOR_BLACK;
+	options.isWatchApp = true;
+	DrawBattBar(options, window_layer);
 	
 	app_event_loop();
 	

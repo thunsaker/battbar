@@ -1,21 +1,30 @@
 // 2013 Thomas Hunsaker @thunsaker
+// BattBar.h
+// BattBar v.1.0
 
 #pragma once
 
 typedef enum {
-	BATBAR_POSITION_LEFT,
-	BATBAR_POSITION_RIGHT,
-	BATBAR_POSITION_BOTTOM
+	BATTBAR_POSITION_LEFT,
+	BATTBAR_POSITION_RIGHT,
+	BATTBAR_POSITION_BOTTOM
 } BBPosition;
 
 typedef enum  {
-	BATBAR_DIRECTION_UP,
-	BATBAR_DIRECTION_DOWN
+	BATTBAR_DIRECTION_UP, // The bar will shorten toward the top of the screen
+	BATTBAR_DIRECTION_DOWN // The bar will shrink toward the bottom of the screen
 } BBDirection;
 
 typedef enum {
-	BATBAR_COLOR_BLACK,
-	BATBAR_COLOR_WHITE
+	BATTBAR_COLOR_BLACK,
+	BATTBAR_COLOR_WHITE
 } BBColor;
-	
-void drawBatteryBar(const BBPosition position, const BBDirection direction, const BBColor color, uint8_t percentage, Layer *current_window);
+
+typedef struct {
+	BBPosition position;
+	BBDirection direction;
+	BBColor color;
+	bool isWatchApp; // Determines height based on the presence of a time title bar
+} BBOptions;
+
+void DrawBattBar(BBOptions options, Layer *current_window);
