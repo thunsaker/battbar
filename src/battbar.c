@@ -1,6 +1,6 @@
 // 2013 Thomas Hunsaker @thunsaker
 // BattBar.c
-// BattBar v.1.0
+// BattBar v.1.1
 
 #include <pebble.h>
 #include "battbar.h"
@@ -21,13 +21,28 @@ void DrawBattBar(BBOptions options, Layer *current_window) {
 	uint8_t raw_percent = charge_state.charge_percent;
 	uint8_t percent_display = raw_percent * segment;
 	
-	if(options.position == BATTBAR_POSITION_BOTTOM) {
+	if(options.position == BATTBAR_POSITION_BOTTOM || options.position == BATTBAR_POSITION_TOP) {
 		segment = 1.4;
 		percent_display = raw_percent * segment;
-		image_layer_battery = bitmap_layer_create(GRect(0,height-4,percent_display,4));
-		image_line = gbitmap_create_with_resource(RESOURCE_ID_BLACK_LINE_LONG);
+		
+		if(options.color == BATTBAR_COLOR_BLACK) {
+			image_line = gbitmap_create_with_resource(RESOURCE_ID_BLACK_LINE_LONG);
+		} else {
+			image_line = gbitmap_create_with_resource(RESOURCE_ID_WHITE_LINE_LONG);
+		}
+			
+		if(options.position == BATTBAR_POSITION_TOP) {
+			image_layer_battery = bitmap_layer_create(GRect(0,0,percent_display,4));
+		} else {
+			image_layer_battery = bitmap_layer_create(GRect(0,height-4,percent_display,4));
+		}
 	} else {
-		image_line = gbitmap_create_with_resource(RESOURCE_ID_BLACK_LINE_FULL);
+		if(options.color == BATTBAR_COLOR_BLACK) {
+			image_line = gbitmap_create_with_resource(RESOURCE_ID_BLACK_LINE_FULL);
+		} else {
+			image_line = gbitmap_create_with_resource(RESOURCE_ID_WHITE_LINE_FULL);
+		}
+
 		if(options.position == BATTBAR_POSITION_LEFT) {
 			if(options.direction == BATTBAR_DIRECTION_UP) {
 				image_layer_battery = bitmap_layer_create(GRect(0,0,4,percent_display));

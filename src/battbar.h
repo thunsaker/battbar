@@ -1,13 +1,14 @@
 // 2013 Thomas Hunsaker @thunsaker
 // BattBar.h
-// BattBar v.1.0
+// BattBar v.1.1
 
 #pragma once
 
 typedef enum {
 	BATTBAR_POSITION_LEFT,
 	BATTBAR_POSITION_RIGHT,
-	BATTBAR_POSITION_BOTTOM
+	BATTBAR_POSITION_BOTTOM,
+	BATTBAR_POSITION_TOP
 } BBPosition;
 
 typedef enum  {

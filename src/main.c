@@ -1,6 +1,6 @@
 // 2013 Thomas Hunsaker @thunsaker
 // Main.c
-// BattBar v.1.0
+// BattBar v.1.1
 
 #include <pebble.h>
 #include "battbar.h"
@@ -29,7 +29,7 @@ int main(void) {
 	
 	/* Change these options to your liking */
 	BBOptions options;
-	options.position = BATTBAR_POSITION_LEFT;
+	options.position = BATTBAR_POSITION_TOP;
 	options.direction = BATTBAR_DIRECTION_DOWN;
 	options.color = BATTBAR_COLOR_BLACK;
 	options.isWatchApp = true;

@@ -1,9 +1,9 @@
 {
-    "versionLabel": "1.0",
+    "versionLabel": "1.2",
     "uuid": "213a2b1c-0846-4f63-8cd7-ac16bdf07f12",
     "appKeys": {},
     "longName": "BattBar - Sample",
-    "versionCode": 1,
+    "versionCode": 3,
     "capabilities": [
         ""
     ],
@@ -14,6 +14,16 @@
     },
     "resources": {
         "media": [
+            {
+                "type": "png",
+                "name": "WHITE_LINE_FULL",
+                "file": "images/white_line_tall.png"
+            },
+            {
+                "type": "png",
+                "name": "WHITE_LINE_LONG",
+                "file": "images/white_line_long.png"
+            },
             {
                 "type": "png",
                 "name": "BLACK_LINE_LONG",
