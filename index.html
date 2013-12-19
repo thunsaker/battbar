@@ -1,13 +1,13 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Pebble-battbar by thunsaker</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <title>Pebble-BattBar by thunsaker</title>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="stylesheets/styles.css">
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -15,11 +15,10 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Pebble-battbar</h1>
+        <h1>Pebble-BattBar</h1>
         <p>A simple battery bar add-in for Pebble developers.</p>
 
         <p class="view"><a href="https://github.com/thunsaker/pebble-battbar">View the Project on GitHub <small>thunsaker/pebble-battbar</small></a></p>
-
 
         <ul>
           <li><a href="https://github.com/thunsaker/pebble-battbar/zipball/master">Download <strong>ZIP File</strong></a></li>
@@ -29,19 +28,122 @@
       </header>
       <section>
         <h1>
-<a name="pebble-battbar" class="anchor" href="#pebble-battbar"><span class="octicon octicon-link"></span></a>pebble-battbar</h1>
+          <a name="pebble-battbar" class="anchor" href="#pebble-battbar"><span class="octicon octicon-link"></span></a>pebble-battbar</h1>
 
-<p>A simple battery bar for add-in for Pebble developers.</p>
-<div style="background: url('pebble_frame_orange.png') no-repeat; height:383px; width:240px;">
-  <img src="battbar_up_left.gif" style="margin-top:107px; margin-left:48px;" />
-</div>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/thunsaker">thunsaker</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
+          <p>A simple battery bar for add-in for Pebble developers.</p>
+          <div style="background: url('img/pebble_frame_orange.png') no-repeat; height:383px; width:240px;">
+            <img src="img/battbar_up_left.gif" style="margin-top:107px; margin-left:48px;" />
+          </div> 
+        </section>
+        <section>
+          <h1>Instructions</h1>
+          <h2>Add to my project</h2>
+          <ol>
+            <li><strong>Download</strong> <a href="https://github.com/thunsaker/pebble-battbar/zipball/master">Pebble-BattBar Source</a></li>
+            <li><strong>Copy battbar.h</strong>, <strong>battbar.c</strong> into your project "src" directory</li>
+            <li><strong>Copy all</strong> image files in <strong>resources/images</strong> to your project "resources/images" directory</li>
+            <li><strong>Declare</strong> the image resources in your appinfo.json. Add the following to the resource/media section<br/>
+              <pre><code>{
+                "type": "png",
+                "name": "WHITE_LINE_FULL",
+                "file": "images/white_line_tall.png"
+              },
+              {
+              "type": "png",
+              "name": "WHITE_LINE_LONG",
+              "file": "images/white_line_long.png"
+            },
+            {
+            "type": "png",
+            "name": "BLACK_LINE_LONG",
+            "file": "images/black_line_long.png"
+          },
+          {
+          "type": "png",
+          "name": "BLACK_LINE_FULL",
+          "file": "images/black_line_tall.png"
+        }</code></pre>
+        Your appinfo.json should look something like this:<pre><code>{
+        "versionLabel": "1",
+        "shortName": "BattBar",
+        "companyName": "thunsaker",
+        ...
+        "resources": {
+        "media": [
+        {
+        "type": "png",
+        "name": "WHITE_LINE_FULL",
+        "file": "images/white_line_tall.png"
+      },
+      ...
+      ]
+    }
+  }
+</code></pre></li>
+<li><strong>Include</strong> battbar.h in your primary c file (i.e. main.c)</li>
+<li><strong>Setup BattBar Options</strong></li>
+<li>Call <strong>DrawBattBar</strong> pass your BBOptions and current window layer</li>
+</ol>
+<div><h2>Example Usage</h2>
+  <pre><code>#include "pebble.h"
+    <strong>#include "battbar.h"</strong> <span style="color:green;">/* Step 4 */</span>
+    ...
+    int main(void) {
+    window = window_create();
+    window_stack_push(window, true);
     
-  </body>
+    Layer *window_layer = window_get_root_layer(window);
+    GRect bounds = layer_get_frame(window_layer);
+
+    ...
+
+    /* Change these options to your liking */
+    <strong>BBOptions options;</strong> <span style="color:green;">/* Step 5 */</span>
+    options.position = BATTBAR_POSITION_TOP;
+    options.direction = BATTBAR_DIRECTION_DOWN;
+    options.color = BATTBAR_COLOR_BLACK;
+    options.isWatchApp = true;
+
+    <strong>DrawBattBar(options, window_layer);</strong> <span style="color:green;">/* Step 6 */</span>
+    ...
+  }</code></pre>
+</div>
+</section>
+<section>
+  <!-- API Options -->
+  <h2>BattBar Options - <code>BBOptions</code></h2>
+  <h3><code>position - enum BBPosition</code></h3>
+  <ul style="list-style-type: none;">
+    <li><code>BATTBAR_POSITION_RIGHT</code> - BattBar on <strong>right</strong> of the screen</li>
+    <li><code>BATTBAR_POSITION_LEFT</code> - BattBar on the <strong>left</strong> of the screen</li>
+    <li><code>BATTBAR_POSITION_BOTTOM</code> - BattBar on the <strong>bottom</strong> of the screen</li>
+    <li><code>BATTBAR_POSITION_TOP</code> - BattBar on the <strong>top</strong> of the screen</li>
+    <li><br /><img src="img/battbar_position.png" /></li>
+  </ul>
+  <h3><code>direction - enum BBDirection</code></h3>
+  <ul style="list-style-type: none;">
+    <li><code>BATTBAR_DIRECTION_UP</code> - BattBar will shrink <strong>from the bottom</strong> of the screen toward the top</li>
+    <li><code>BATTBAR_DIRECTION_DOWN</code> - BattBar will shrink <strong>from the top</strong> of the screen toward the bottom</li>
+  </ul>
+
+  <h3><code>color - enum BBColor</code></h3>
+  <ul style="list-style-type: none;">
+    <li><code>BATTBAR_COLOR_BLACK</code> - BattBar will be <strong>black</strong></li>
+    <li><code>BATTBAR_COLOR_WHITE</code> - BattBar will be <strong>white</strong></li>
+  </ul>
+
+  <h3><code>isWatchApp - bool</code></h3>
+  <ul style="list-style-type: none;">
+    <li><code>true</code> - BattBar adjusts for the titlebar present in watch apps - 152px</li>
+    <li><code>false</code> - BattBar will use the full height of the screen - 168px</li>
+  </ul>  
+</section>
+<footer>
+  <p>This project is maintained by <a href="https://github.com/thunsaker">thunsaker</a></p>
+  <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+</footer>
+</div>
+<script src="javascripts/scale.fix.js"></script>
+
+</body>
 </html>
