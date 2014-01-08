@@ -1,6 +1,6 @@
 // 2013 Thomas Hunsaker @thunsaker
 // Main.c
-// BattBar v.1.1
+// BattBar v.1.3
 
 #include <pebble.h>
 #include "battbar.h"
@@ -33,7 +33,8 @@ int main(void) {
 	options.direction = BATTBAR_DIRECTION_DOWN;
 	options.color = BATTBAR_COLOR_BLACK;
 	options.isWatchApp = true;
-	DrawBattBar(options, window_layer);
+	SetupBattBar(options, window_layer); /* Setup the display, subscribe to battery service */
+	DrawBattBar(); /* Initial display of the bar */
 	
 	app_event_loop();
 	

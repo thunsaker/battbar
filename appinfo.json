@@ -16,6 +16,16 @@
         "media": [
             {
                 "type": "png",
+                "name": "CHARGING_LINE_LONG",
+                "file": "images/charging_long.png"
+            },
+            {
+                "type": "png",
+                "name": "CHARGING_LINE_FULL",
+                "file": "images/charging_tall.png"
+            },
+            {
+                "type": "png",
                 "name": "WHITE_LINE_FULL",
                 "file": "images/white_line_tall.png"
             },
