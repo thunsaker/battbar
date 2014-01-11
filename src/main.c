@@ -1,6 +1,6 @@
-// 2013 Thomas Hunsaker @thunsaker
-// Main.c
-// BattBar v.1.3
+// 2014 Thomas Hunsaker @thunsaker
+// main.c
+// BattBar v.1.4
 
 #include <pebble.h>
 #include "battbar.h"

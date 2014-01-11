@@ -1,6 +1,6 @@
-// 2013 Thomas Hunsaker @thunsaker
+// 2014 Thomas Hunsaker @thunsaker
 // BattBar.c
-// BattBar v.1.2
+// BattBar v.1.4
 
 #include <pebble.h>
 #include "battbar.h"
@@ -36,10 +36,10 @@ void RefreshBattBar(BatteryChargeState charge_state) {
 	int height = 168; // Without Title Bar
 	int width = 144;
 	int bar_size = 2;
-	double segment = 1.86; //1.6;
+	double segment = 1.68;
 	if(options.isWatchApp) {
 		height = 152; // With Title Bar
-		segment = 1.68; // 1.5;
+		segment = 1.52;
 	}
 	
 	uint8_t raw_percent = charge_state.charge_percent;
@@ -47,7 +47,7 @@ void RefreshBattBar(BatteryChargeState charge_state) {
 	bool isCharging = charge_state.is_charging;
 	
 	if(options.position == BATTBAR_POSITION_BOTTOM || options.position == BATTBAR_POSITION_TOP) {
-		segment = 1.6; // 1.4;
+		segment = 1.44;
 		percent_display = raw_percent * segment;
 		if(isCharging) {
 			image_line = gbitmap_create_with_resource(RESOURCE_ID_CHARGING_LINE_LONG);

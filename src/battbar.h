@@ -1,6 +1,6 @@
-// 2013 Thomas Hunsaker @thunsaker
+// 2014 Thomas Hunsaker @thunsaker
 // BattBar.h
-// BattBar v.1.2
+// BattBar v.1.4
 
 #pragma once
 
