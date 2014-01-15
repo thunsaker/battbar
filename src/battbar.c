@@ -10,11 +10,25 @@ static GBitmap *image_line;
 static BBOptions options;
 static Layer *current_window;
 
+static Layer *battbar_layer;
+static GPath *battbar_path;
+static const GPathInfo BATTBAR_PATH_INFO = {
+	.num_points = 4,
+	.points = (GPoint []) {{0,0}, {0,100}, {2, 100}, {2,0}}
+};
+
 void battbar(void) {
 	options.position = BATTBAR_POSITION_LEFT;
 	options.direction = BATTBAR_DIRECTION_UP;
 	options.color = BATTBAR_COLOR_BLACK;
 	options.isWatchApp = false;
+}
+
+void battbar_layer_update_callback(Layer *layer, GContext* context) {
+	graphics_context_set_stroke_color(context, GColorBlack);
+	gpath_draw_outline(context, battbar_path);
+	graphics_context_set_fill_color(context, GColorBlack);
+	gpath_draw_filled(context, battbar_path);
 }
 
 static void battbar_handle_battery(BatteryChargeState charge_state) {
@@ -92,4 +106,15 @@ void RefreshBattBar(BatteryChargeState charge_state) {
 	
 	bitmap_layer_set_bitmap(image_layer_battery, image_line);
 	layer_add_child(current_window, bitmap_layer_get_layer(image_layer_battery));
+
+	battbar_path = gpath_create(&BATTBAR_PATH_INFO);
+
+	// Add new battbar path to the screen
+	layer_set_update_proc(battbar_layer, battbar_layer_update_callback);
 }
+/*
+void deinit(void) {
+	layer_destroy(image_layer_battery);
+	layer_destroy(battbar_layer);
+}
+*/
